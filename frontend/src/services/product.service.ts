@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { Product } from '../types';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.REACT_APP_API_URL;
 
 // Log the API URL being used
 console.log('Using API URL:', API_URL);
