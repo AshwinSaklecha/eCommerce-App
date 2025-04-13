@@ -6,13 +6,23 @@ const router = express.Router();
 // Get all products
 router.get('/', async (req, res) => {
   try {
+    console.log('GET /products request received');
     const { category, brand } = req.query;
     const filter = {};
     
     if (category) filter.category = category;
     if (brand) filter.brand = brand;
     
+    console.log('Query filters:', filter);
+    
     const products = await Product.find(filter);
+    console.log(`Found ${products.length} products`);
+    
+    // Add CORS headers explicitly
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    
     res.json(products);
   } catch (err) {
     console.error('Get products error:', err);

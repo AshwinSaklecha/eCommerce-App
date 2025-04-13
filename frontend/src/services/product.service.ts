@@ -3,10 +3,15 @@ import { Product } from '../types';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
 
+// Log the API URL being used
+console.log('Using API URL:', API_URL);
+
 class ProductService {
   async getAllProducts(): Promise<Product[]> {
     try {
+      console.log('Fetching products from:', `${API_URL}/products`);
       const response = await axios.get(`${API_URL}/products`);
+      console.log('Products response:', response.data);
       return response.data;
     } catch (error) {
       console.error('Error fetching products:', error);
@@ -27,7 +32,9 @@ class ProductService {
         url += `?${params.join('&')}`;
       }
       
+      console.log('Fetching filtered products from:', url);
       const response = await axios.get(url);
+      console.log('Filtered products response:', response.data);
       return response.data;
     } catch (error) {
       console.error('Error fetching products:', error);
